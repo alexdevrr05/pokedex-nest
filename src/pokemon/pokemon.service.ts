@@ -4,6 +4,8 @@ import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 @Injectable()
 export class PokemonService {
   create(createPokemonDto: CreatePokemonDto) {
+    // para que se grabe el pokemon en minusculas
+    createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
     return createPokemonDto;
   }
 
