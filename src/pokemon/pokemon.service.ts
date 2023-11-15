@@ -13,12 +13,12 @@ import { Pokemon } from './entities/pokemon.entity';
 @Injectable()
 export class PokemonService {
   constructor(
+    // inyeccion de dependecias
     @InjectModel(Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
   ) {}
 
   async create(createPokemonDto: CreatePokemonDto) {
-    // pokemon en minusculas
     createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
 
     try {
@@ -61,6 +61,7 @@ export class PokemonService {
   }
 
   async update(term: string, updatePokemonDto: UpdatePokemonDto) {
+    // uso mi service "findOne"
     const pokemon = await this.findOne(term);
 
     if (updatePokemonDto.name) {
@@ -68,7 +69,6 @@ export class PokemonService {
     }
 
     try {
-      // hacemos uso de nuesto service "updateOne"
       await pokemon.updateOne(updatePokemonDto);
       /**
        * Si no truena en la linea anterior
@@ -81,8 +81,11 @@ export class PokemonService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+  async remove(id: string) {
+    // const pokemon = await this.findOne(id);
+    // await pokemon.deleteOne();
+    const result = this.pokemonModel.findByIdAndDelete(id);
+    return result;
   }
 
   private handleExceptions(error: any) {
