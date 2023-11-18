@@ -21,7 +21,9 @@ import { JoiValidationSchema } from './config/joi.validation';
     }),
 
     // nest-pokemon =  (docker-compose)
-    MongooseModule.forRoot(process.env.MONGODB),
+    MongooseModule.forRoot(process.env.MONGODB, {
+      dbName: 'pokemonsDB',
+    }),
 
     PokemonModule,
 
