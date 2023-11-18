@@ -39,6 +39,16 @@ yarn start:dev
 GET http://localhost:3000/api/v2/seed
 ```
 
+# Production Build
+
+1. Crear el archivo **.env.prod**
+2. Establecer las variables de entorno de producción
+3. Crear la nueva imagen
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
 ## Stack utilizado
 
 - <a href="https://www.mongodb.com" target="_blank">MongoDB</a>
